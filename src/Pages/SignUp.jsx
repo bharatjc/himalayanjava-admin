@@ -125,7 +125,7 @@ function SignUp() {
               <button
               disabled={loading}
               type="submit"
-              className="disabled:bg-blue-300 disabled:cursor-no-drop px-4 py-2 text-amber-900 bg-[#D8C3A5] rounded-md">
+              className="disabled:bg-[#dad7d3] disabled:cursor-no-drop px-4 py-2 text-amber-900 bg-[#D8C3A5] rounded-md">
                 Create an account
               </button>
             </div>

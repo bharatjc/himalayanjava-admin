@@ -99,7 +99,7 @@ function Login() {
               </div>
             </div>
             <div className="flex justify-center my-10">
-              <button disabled={loading} className="disabled:bg-blue-300 disabled:cursor-no-drop px-7 py-3 text-amber-900 bg-[#D8C3A5] rounded-md">
+              <button disabled={loading} className="disabled:bg-[#dad7d3] disabled:cursor-no-drop px-7 py-3 text-amber-900 bg-[#D8C3A5] rounded-md">
                 Log in
               </button>
             </div>
