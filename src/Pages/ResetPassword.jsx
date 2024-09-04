@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from "axios"; 
 
 function ResetPassword() {
-
+  const[loading, setLoading] = useState(false)
   const [password, setPassword] = useState()
   const {id, token} = useParams()
   const navigate = useNavigate();
@@ -16,7 +16,9 @@ function ResetPassword() {
           if(res.data.Status === "Success") {
               navigate('/')
           }
-      }).catch(err => console.log(err))
+      }).catch((err) => { console.log(err)
+        setLoading(false)
+      })
   }
 
 
@@ -52,7 +54,7 @@ function ResetPassword() {
               </div>
             </div>
             <div className="flex justify-center my-10">
-              <button className="px-7 py-3 text-amber-900 bg-[#D8C3A5] rounded-md">
+              <button disabled={loading} className="disabled:bg-[#dad7d3] disabled:cursor-no-drop px-7 py-3 text-amber-900 bg-[#D8C3A5] rounded-md">
                Send
               </button>
             </div>

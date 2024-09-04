@@ -5,12 +5,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function ForgotPassword() {
-
-  const [email, setEmail] = useState()
+const[loading, setLoading] = useState(false)
+const [email, setEmail] = useState()
 const navigate = useNavigate()
 
 function handleSubmit(e){
   e.preventDefault();
+  setLoading(true)
   axios
       .post(`https://himalayanjava-server.onrender.com/forgotpassword`, {email})
       .then(res => {
@@ -18,7 +19,9 @@ function handleSubmit(e){
             navigate('/login')
         }
         toast("Url is sent to your email", { autoClose: 2000 });
-    }).catch(err => console.log(err))
+    }).catch((err) => { console.log(err)
+      setLoading(false)
+    })
 }
 
   return (
@@ -53,7 +56,7 @@ function handleSubmit(e){
               </div>
             </div>
             <div className="flex justify-center my-10">
-              <button className="px-7 py-3 text-amber-900 bg-[#D8C3A5] rounded-md">
+              <button disabled={loading} className="disabled:bg-[#dad7d3] disabled:cursor-no-drop px-7 py-3 text-amber-900 bg-[#D8C3A5] rounded-md">
                 Send
               </button>
             </div>
