@@ -31,7 +31,7 @@ function App() {
       element: <SignUp/>,
     },
     {
-      path: "resetpassword",
+      path: "resetpassword/:id/:token",
       element: <ResetPassword/>,
     },
     {
