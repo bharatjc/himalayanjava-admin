@@ -12,7 +12,7 @@ const navigate = useNavigate()
 function handleSubmit(e){
   e.preventDefault();
   axios
-      .post(`https://jsfiddleserver.onrender.com/forgotpassword`, {email})
+      .post(`https://himalayanjava-server.onrender.com/forgotpassword`, {email})
       .then(res => {
         if(res.data.Status === "Success") {
             navigate('/login')
