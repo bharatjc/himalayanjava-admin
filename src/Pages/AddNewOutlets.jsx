@@ -62,7 +62,7 @@ function AddNewOutlets() {
     <h2 className="md:text-center text-2xl text-amber-900 font-semibold my-5">
           Add new outlet
           </h2>
-          <form onSubmit={handleSubmit(e)} className="mt-10 text-lg md:px-40">
+          <form onSubmit={handleSubmit} className="mt-10 text-lg md:px-40">
     <label htmlFor="location" className="font-semibold">
       Location*
     </label>
