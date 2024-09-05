@@ -35,7 +35,7 @@ let userId = localStorage.getItem("userId")
       formData.append('image', userData.image);
     }
     axios
-      .post(`https://himalayanjava-server.onrender.com/update/${userId}`, formData,
+      .put(`https://himalayanjava-server.onrender.com/update/${userId}`, formData,
     )
       .then((res) => {
         toast("Profile updated successfully!", { autoClose: 2000 });
