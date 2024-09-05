@@ -25,7 +25,7 @@ function SignUp() {
     setFormErrors([]);
     setLoading(true)
     axios
-      .post(`https://himalayanjava-server.onrender.com/api/signup`, {
+      .post(`https://himalayanjava-server.onrender.com/signup`, {
         username: inputs.username,
         email: inputs.email,
         password: inputs.password,

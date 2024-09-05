@@ -24,7 +24,7 @@ function Login() {
     e.preventDefault();
     setLoading(true)
     axios
-      .post(`https://himalayanjava-server.onrender.com/api/login`, user)
+      .post(`https://himalayanjava-server.onrender.com/login`, user)
       .then((res) => {
         toast("Logged in successfully!", { autoClose: 2000 });
         localStorage.setItem("access_token", res.data.data.token);
