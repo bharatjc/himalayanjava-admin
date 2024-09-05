@@ -20,7 +20,7 @@ function UpdateProfile() {
     if (name === "image") {
       setUserData({ ...userData, image: files[0] });
     } else {
-      setMenuData({ ...userData, [name]: value });
+      setUserData({ ...userData, [name]: value });
     }
   }
 
