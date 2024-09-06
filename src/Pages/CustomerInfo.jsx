@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios'
+import { BsInfoCircleFill } from "react-icons/bs";
 
 function CustomerInfo() {
+
+ const [customerData, setCustomerData] = useState([])
+  
+  useEffect(()=>{
+    axios.get(`https://himalayanjava-server.onrender.com/customer`).then((res)=>{
+      setCustomerData(res.data)
+      console.log(res.data)
+    })
+  },[])
   return (
     <div className="md:text-center mb-10">
       <h2 className="text-2xl text-amber-900 font-semibold my-5">
@@ -28,6 +39,21 @@ function CustomerInfo() {
                 </th>
             </tr>
         </thead>
+
+        <tbody>
+            {
+              customerData.map((customer,index)=>{
+                return <tr key={customer._id} className="px-2">
+                  <td className='px-1 md:px-6 py-3'>{index+1}</td>
+                  <td className='px-1 md:px-6 py-3'>{customer.name}</td>
+                  <td className='px-1 md:px-6 py-3'>{(customer.profession)?(customer.profession):"N/A"}</td>
+                  <td className='px-1 md:px-6 py-3 hidden md:block'>{customer.rating}</td>
+                  <td className='px-1 md:px-6 py-3 pl-6'><BsInfoCircleFill /></td>
+                </tr>
+              })
+            }
+        </tbody>
+
         </table>
       </div>
     </div>
