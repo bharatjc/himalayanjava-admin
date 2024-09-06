@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaHome, FaPlus, FaRegBell, FaUser } from "react-icons/fa";
 import { MdMiscellaneousServices, MdOutlineMenuBook, MdEdit } from "react-icons/md";
 import { HiOutlineUsers } from "react-icons/hi2";
@@ -10,10 +10,14 @@ import { FaHandHoldingDollar } from "react-icons/fa6";
 import { Link, Outlet } from 'react-router-dom';
 
 function Home() {
+
+  let admin = JSON.parse(localStorage.getItem("initialdata"))
+  useEffect(()=>{
+  },[])
+
   return (
     <div className="bg-[#D3D3D3] flex items-center justify-center min-h-screen p-5">
       <div className="flex flex-col md:flex-row justify-between w-full max-w-6xl gap-x-5 gap-y-10">
-        
         <div className="rounded-xl w-full md:w-1/5 bg-white flex flex-col justify-between p-5 text-amber-900 text-sm shadow-lg">
           <div className="flex flex-col items-center mb-10">
             <img src="../himalayanjava-logo.png" alt="Logo" className='h-20 w-20 mb-5' />
@@ -51,7 +55,9 @@ function Home() {
             </div>
             <div className="flex gap-3 items-center">
               <LuLogOut className="text-2xl" />
-              <Link to="/">Logout</Link>
+              <Link to="/" onClick={()=>{
+                localStorage.clear();
+              }}>Logout</Link>
             </div>
           </div>
         </div>
@@ -74,16 +80,19 @@ function Home() {
               <FaPlus />
               <Link to="updateprofile">Update</Link>
             </button>
-            <MdEdit className="text-3xl md:text-2xl" />
+           <Link to="updateprofile"><MdEdit className="text-3xl md:text-2xl" /></Link> 
             <FaRegBell className="text-3xl md:text-2xl" />
           </div>
 
           <div className="flex items-center justify-center mb-10">
-            <div className="p-2 border-2 rounded-full mr-3">
-              <FaUser className="text-2xl" />
+          { admin.image ? <div className='border-2 mr-3 w-20 h:20 rounded-full bg-cover'> <img src={admin.image} alt="" className='w-full h-full rounded-full object-cover' /></div>:<div className="border-2 mr-3 p-2 rounded-full">   
+                <FaUser className="text-2xl" />
             </div>
+             }
             <p className="text-sm">
-              Hi, <span className="text-green-400">seller</span>
+              Hi, <span className="text-green-400">
+                {admin.username}
+                </span>
             </p>
           </div>
 

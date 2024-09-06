@@ -27,9 +27,10 @@ function Login() {
       .post(`https://himalayanjava-server.onrender.com/login`, user)
       .then((res) => {
         toast("Logged in successfully!", { autoClose: 2000 });
+        navigate("/home");
         localStorage.setItem("access_token", res.data.data.token);
         localStorage.setItem("userId", res.data.data._id)
-        navigate("/home");
+        localStorage.setItem("initialdata", JSON.stringify(res.data.data))
       })
       .catch((err) => {
         if (err.response.status) {
