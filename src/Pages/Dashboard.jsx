@@ -1,7 +1,15 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { FaRegUserCircle } from "react-icons/fa";
 
 function Dashboard() {
+  let [newCustomers,setNewCustomers] = useState([])
+  useEffect(()=>{
+    axios.get(`https://himalayanjava-server.onrender.com/latestcustomers`).then((res)=>{
+      setNewCustomers(res.data)
+    })
+  },[])
+
   return (
     <div>
       <h2 className="text-2xl text-amber-900 font-semibold my-5">
@@ -21,7 +29,9 @@ function Dashboard() {
           <div className="flex justify-between text-sm mb-10">
             <div>
               <h2>Customers</h2>
-              <p className="text-[12px] text-center font-bold">10,243</p>
+              <p className="text-[12px] text-center font-bold">{  
+             newCustomers && newCustomers.customers ?
+              newCustomers.total : "..."}</p>
             </div>
             <div>
               <h2>Income</h2>
@@ -32,11 +42,18 @@ function Dashboard() {
           <div className="text-sm mb-5">
             <h2>Welcome to our new customers</h2>
             <ul className="flex flex-wrap my-5 gap-10">
-              <li className="border-r-2 px-8">
-                <FaRegUserCircle className="text-5xl" />
-                <p className="text-center text-[10px]">Johnson D.</p>
-              </li>
-              <li className="border-r-2 px-8">
+             
+
+              {
+                newCustomers && newCustomers.customers ? newCustomers.customers.map((customer)=>{
+                  return  <li className="border-r-2 px-8">
+                  <FaRegUserCircle className="text-5xl" />
+                  <p className="text-center text-[10px]">{customer.name}</p>
+                </li>
+                 }) : "Loading..."
+              }
+
+              {/* <li className="border-r-2 px-8">
                 <FaRegUserCircle className="text-5xl" />
                 <p className="text-center text-[10px]">Didinya J.</p>
               </li>
@@ -47,7 +64,7 @@ function Dashboard() {
               <li className="border-r-2 px-8">
                 <FaRegUserCircle className="text-5xl" />
                 <p className="text-center text-[10px]">Elon M.</p>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div>

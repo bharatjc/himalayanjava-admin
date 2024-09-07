@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaHome, FaPlus, FaRegBell, FaUser } from "react-icons/fa";
 import { MdMiscellaneousServices, MdOutlineMenuBook, MdEdit } from "react-icons/md";
 import { HiOutlineUsers } from "react-icons/hi2";
@@ -10,10 +10,7 @@ import { FaHandHoldingDollar } from "react-icons/fa6";
 import { Link, Outlet } from 'react-router-dom';
 
 function Home() {
-
-  let admin = JSON.parse(localStorage.getItem("initialdata"))
-  useEffect(()=>{
-  },[])
+let admin = JSON.parse(localStorage.getItem("initialdata"))
 
   return (
     <div className="bg-[#D3D3D3] flex items-center justify-center min-h-screen p-5">
