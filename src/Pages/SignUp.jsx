@@ -47,7 +47,7 @@ function SignUp() {
     }
 
   return (
-    <div className="h-[100vh] flex flex-col items-center py-10">
+    <div className="bg-white h-[100vh] flex flex-col items-center py-10">
       <div className="w-[320px] md:w-[400px]">
         <div className="flex justify-center">
         <div className="h-24 w-24">

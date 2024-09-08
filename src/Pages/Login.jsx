@@ -48,7 +48,7 @@ function Login() {
   }
 
   return (
-    <div className="flex h-[100vh] flex-col items-center py-10">
+    <div className="bg-white flex h-[100vh] flex-col items-center py-10">
       <div className="w-[320px] px-5 md:w-[400px]">
         <div className="flex justify-center">
         <div className="h-24 w-24">
