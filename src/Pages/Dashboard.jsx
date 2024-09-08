@@ -139,7 +139,9 @@ function Dashboard() {
                          <td className='px-1 md:px-6 py-3'>{profit.profit}</td>
                       </tr>
                     })
-                  ): "Loading..."
+                  ): <tr>
+                  <td colSpan="5" className="text-center py-3">Loading...</td>
+                </tr>
                 }
               </tbody>
              </table>

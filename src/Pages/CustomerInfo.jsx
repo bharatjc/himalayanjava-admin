@@ -8,7 +8,7 @@ function CustomerInfo() {
   
   useEffect(()=>{
     axios.get(`https://himalayanjava-server.onrender.com/customer`).then((res)=>{
-      setCustomerData(res.data)
+      setCustomerData(res.data.customers)
     })
   },[])
   return (
@@ -38,7 +38,7 @@ function CustomerInfo() {
 
         <tbody>
             {
-              customerData.map((customer,index)=>{
+           Array.isArray(customerData) && customerData.map((customer,index)=>{
                 return <tr key={customer._id} className="px-2">
                   <td className='px-1 md:px-6 py-3'>{index+1}</td>
                   <td className='px-1 md:px-6 py-3'>{customer.name}</td>

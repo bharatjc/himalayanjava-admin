@@ -135,31 +135,31 @@ function Home() {
 
           <h2 className="text-lg font-semibold mb-5">Popular Outlets</h2>
           <div className="flex justify-between text-sm mb-5">
-            <p className="w-full"><h2 className="font-semibold">Outlets</h2> <br />
+            <div className="w-full"><h2 className="font-semibold">Outlets</h2> <br />
             <div className="w-full h-12 overflow-hidden">
-              <p className="text-xs h-full overflow-y-auto">
+              <div className="text-xs h-full overflow-y-auto">
               {
                 popularOutlets? popularOutlets.map((popularOutlet,index)=>{
                   return <div key={index}>{index+1 }.  {popularOutlet.location}
             </div>
                 }) : ""
               }
-              </p>
+              </div>
               
             </div>
-            </p>
+            </div>
           </div>
           <div>
             <h2 className="mb-2 font-semibold">New Comments</h2>
             <div className="w-full h-36 overflow-hidden">
-              <p className="text-xs h-full overflow-y-auto">
+              <div className="text-xs h-full overflow-y-auto">
               {
                 comments? comments.map((comment,index)=>{
                   return <div key={index}>{index+1 }.  {comment.comment}
             </div>
                 }) : "..."
               }
-              </p>
+              </div>
               
             </div>
           </div>
