@@ -18,6 +18,7 @@ import Income from './Pages/Income'
 import Help from './Pages/Help'
 import ResetPassword from './Pages/ResetPassword'
 import ForgotPassword from './Pages/ForgotPassword'
+import Contact from './Pages/Contact';
 
 function App() {
 
@@ -77,6 +78,10 @@ function App() {
         {
           path: "help",
           element: <Help />,
+        },
+        {
+          path: "contact",
+          element: <Contact />,
         },
       ]
     },

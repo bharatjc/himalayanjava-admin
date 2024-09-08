@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaHome, FaPlus, FaRegBell, FaUser } from "react-icons/fa";
+import { FaHome, FaPlus, FaUser } from "react-icons/fa";
 import { MdMiscellaneousServices, MdOutlineMenuBook, MdEdit } from "react-icons/md";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { BsFillHouseAddFill } from "react-icons/bs";
@@ -7,6 +7,7 @@ import { RxQuestionMarkCircled } from "react-icons/rx";
 import { LuLogOut } from "react-icons/lu";
 import { CiSearch } from "react-icons/ci";
 import { FaHandHoldingDollar } from "react-icons/fa6";
+import { BiMessageRounded } from "react-icons/bi";
 import { Link, Outlet } from 'react-router-dom';
 
 function Home() {
@@ -15,7 +16,7 @@ let admin = JSON.parse(localStorage.getItem("initialdata"))
   return (
     <div className="bg-[#D3D3D3] flex items-center justify-center min-h-screen p-5">
       <div className="flex flex-col md:flex-row justify-between w-full max-w-6xl gap-x-5 gap-y-10">
-        <div className="rounded-xl w-full md:w-1/5 bg-white flex flex-col justify-between p-5 text-amber-900 text-sm shadow-lg">
+        <div className="rounded-xl w-full md:w-1/5 bg-white flex flex-col p-5 text-amber-900 text-sm shadow-lg">
           <div className="flex flex-col items-center mb-10">
             <img src="../himalayanjava-logo.png" alt="Logo" className='h-20 w-20 mb-5' />
           </div>
@@ -78,7 +79,7 @@ let admin = JSON.parse(localStorage.getItem("initialdata"))
               <Link to="updateprofile">Update</Link>
             </button>
            <Link to="updateprofile"><MdEdit className="text-3xl md:text-2xl" /></Link> 
-            <FaRegBell className="text-3xl md:text-2xl" />
+           <Link to="contact"><BiMessageRounded className="text-3xl md:text-2xl" /></Link> 
           </div>
 
           <div className="flex items-center justify-center mb-10">
@@ -96,10 +97,10 @@ let admin = JSON.parse(localStorage.getItem("initialdata"))
           <h2 className="text-lg font-semibold mb-5">Popular Outlets</h2>
           <div className="flex justify-between text-sm mb-10">
             <p className="w-[65%]">Outlets</p>
-            <p className="w-[30%]">Items</p>
+            <p className="w-[30%]">Specials</p>
           </div>
           <div>
-            <h2 className="mb-5 font-semibold">Comments</h2>
+            <h2 className="mb-5 font-semibold">New Comments</h2>
             <p className="text-xs">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>

@@ -9,7 +9,6 @@ function CustomerInfo() {
   useEffect(()=>{
     axios.get(`https://himalayanjava-server.onrender.com/customer`).then((res)=>{
       setCustomerData(res.data)
-      console.log(res.data)
     })
   },[])
   return (
@@ -31,11 +30,8 @@ function CustomerInfo() {
                 <th scope="col" className="text-[10px] px-1 md:px-6 py-3">
                     Profession
                 </th>
-                <th scope="col" className="text-[10px] px-1 md:px-6 py-3 hidden md:block">
-                    Ratings
-                </th>
                 <th scope="col" className="text-[10px] px-1 md:px-6 py-3">
-                View details
+                    Ratings
                 </th>
             </tr>
         </thead>
@@ -47,8 +43,7 @@ function CustomerInfo() {
                   <td className='px-1 md:px-6 py-3'>{index+1}</td>
                   <td className='px-1 md:px-6 py-3'>{customer.name}</td>
                   <td className='px-1 md:px-6 py-3'>{(customer.profession)?(customer.profession):"N/A"}</td>
-                  <td className='px-1 md:px-6 py-3 hidden md:block'>{customer.rating}</td>
-                  <td className='px-1 md:px-6 py-3 pl-6'><BsInfoCircleFill /></td>
+                  <td className='px-1 md:px-6 py-3'>{customer.rating}</td>
                 </tr>
               })
             }
