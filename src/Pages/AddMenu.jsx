@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import { RxCrossCircled } from "react-icons/rx";
 
 function AddMenu() {
 
   const [loading, setLoading] = useState(false)
+  const [deleteMenu, setDeleteMenu] = useState(false)
+  const [menuItems, setMenuItems] = useState([])
   const [menudata, setMenuData] = useState({
     menuName: "",
     menuPrice: "",
@@ -57,6 +60,24 @@ function AddMenu() {
       });
   }
 
+  useEffect(()=>{
+   axios.get(`https://himalayanjava-server.onrender.com/menu`).then((res)=>{
+    setMenuItems(res.data.menus)
+   })
+  },[])
+
+  function removeMenu(menuName){
+    axios
+    .delete(`https://himalayanjava-server.onrender.com/deletemenu/${menuName}`)
+    .then((res) => {
+      toast(`Menu deleted successfully`, { autoClose: 2000 });
+    })
+    .catch((err) => {
+      console.error("Error:", err);
+    });
+  }
+  
+
   return (
     <div>
       <h2 className="md:text-center text-2xl text-amber-900 font-semibold my-5">
@@ -97,10 +118,38 @@ function AddMenu() {
         id="image"
         onChange={handleChange}
       />
-      <button disabled={loading} className="disabled:bg-[#dad7d3] disabled:cursor-no-drop bg-[#D8C3A5] text-amber-900 px-3 py-2 mt-5 text-[16px] rounded-lg">
+      <button type='submit' disabled={loading} className="disabled:bg-[#dad7d3] disabled:cursor-no-drop bg-[#D8C3A5] text-amber-900 px-3 py-2 text-[16px] rounded-lg">
         Add Item
       </button>
     </form>
+    <div className='my-2 md:px-40'><button className='text-white px-3 py-2 text-[16px] rounded-lg bg-red-700' onClick={()=>{
+      setDeleteMenu(!deleteMenu)
+    }}>Click here to delete menus</button>
+    <table className={`${deleteMenu ? "block" : "hidden"} my-5 text-[12px] font-serif`}>
+      <thead>
+        <tr>
+          <th className='w-40 py-3'>S.N</th>
+          <th className='w-40 py-3'>Menu</th>
+          <th className='w-40 py-3'>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          menuItems.map((item,index)=>{
+            return <tr key={index}>
+            <td className='w-40 pl-8'>{index+1}</td>
+            <td className='w-40'>{item.menuName}</td>
+            <td className='w-40 pl-10 relative group cursor-pointer'><RxCrossCircled onClick={()=>removeMenu(item.menuName)}/>
+            <div className="absolute right-5 w-[100px] top-full mt-1 hidden group-hover:block bg-black text-white text-xs p-2 rounded">
+                          Remove this menu
+                        </div>
+            </td>
+            </tr>
+          })
+        }
+      </tbody>
+    </table>
+    </div>
     </div>
   )
 }

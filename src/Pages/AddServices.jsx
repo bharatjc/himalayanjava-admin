@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { RxCrossCircled } from "react-icons/rx";
 
 function AddServices() {
 
   const [loading, setLoading] = useState(false)
+  const [deleteService, setDeleteService] = useState(false)
+  const [serviceItems, setServiceItems] = useState([])
   const [servicedata, setServiceData] = useState({
     title: "",
     description: "",
@@ -57,6 +60,23 @@ function AddServices() {
       });
   }
 
+  useEffect(()=>{
+    axios.get(`https://himalayanjava-server.onrender.com/service`).then((res)=>{
+     setServiceItems(res.data.services)
+    })
+   },[])
+ 
+   function removeService(title){
+     axios
+     .delete(`https://himalayanjava-server.onrender.com/deleteservice/${title}`)
+     .then((res) => {
+       toast(`Menu deleted successfully`, { autoClose: 2000 });
+     })
+     .catch((err) => {
+       console.error("Error:", err);
+     });
+   }
+
   return (
     <div>
       <h2 className="md:text-center text-2xl text-amber-900 font-semibold my-5">
@@ -97,10 +117,39 @@ function AddServices() {
         id="image"
         onChange={handleChange}
       />
-      <button disabled={loading} className="disabled:bg-[#dad7d3] disabled:cursor-no-drop bg-[#D8C3A5] text-amber-900 px-3 py-2 mt-5 text-[16px] rounded-lg">
+      <button type='submit' disabled={loading} className="disabled:bg-[#dad7d3] disabled:cursor-no-drop bg-[#D8C3A5] text-amber-900 px-3 py-2 text-[16px] rounded-lg">
         Add Service
       </button>
     </form>
+
+    <div className='my-2 md:px-40'><button className='text-white px-3 py-2 text-[16px] rounded-lg bg-red-700' onClick={()=>{
+      setDeleteService(!deleteService)
+    }}>Click here to delete services</button>
+    <table className={`${deleteService ? "block" : "hidden"} my-5 text-[12px] font-serif`}>
+      <thead>
+        <tr>
+          <th className='w-40 py-3'>S.N</th>
+          <th className='w-40 py-3'>Service</th>
+          <th className='w-40 py-3'>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          serviceItems.map((item,index)=>{
+            return <tr key={index}>
+            <td className='w-40 pl-8'>{index+1}</td>
+            <td className='w-40'>{item.title}</td>
+            <td className='w-40 pl-10 relative group cursor-pointer'><RxCrossCircled onClick={()=>removeService(item.title)}/>
+            <div className="absolute right-5 w-[100px] top-full mt-1 hidden group-hover:block bg-black text-white text-xs p-2 rounded">
+                          Remove this service
+                        </div>
+            </td>
+            </tr>
+          })
+        }
+      </tbody>
+    </table>
+    </div>
     </div>
   )
 }
