@@ -95,6 +95,9 @@ function AddServices() {
         value={servicedata.title}
         onChange={handleChange}
       />
+      <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "title")?.message}
+                </p>
       <label htmlFor="description" className="font-semibold">
         Description*
       </label>
@@ -107,6 +110,9 @@ function AddServices() {
         value={servicedata.description}
         onChange={handleChange}
       />
+      <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "description")?.message}
+                </p>
       <label htmlFor="image" className="font-semibold">
         Image
       </label>

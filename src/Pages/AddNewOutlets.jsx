@@ -96,6 +96,9 @@ function AddNewOutlets() {
       value={outletdata.location}
       onChange={handleChange}
     />
+    <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "location")?.message}
+                </p>
     <label htmlFor="special" className="font-semibold">
       Special
     </label>
@@ -107,6 +110,9 @@ function AddNewOutlets() {
       value={outletdata.special}
       onChange={handleChange}
     />
+    <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "special")?.message}
+                </p>
     <label htmlFor="image" className="font-semibold">
       Image
     </label>

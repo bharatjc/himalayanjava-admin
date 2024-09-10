@@ -55,11 +55,14 @@ function Income() {
       value={incomeData.sales}
       onChange={handleChange}
     />
+    <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "sales")?.message}
+                </p>
     <label htmlFor="expenses" className="font-semibold">
       Expenditure*
     </label>
     <input
-      className="mb-8 p-2 w-full border-[1px] border-[#C2C5E1] h-8 text-sm"
+      className="mb-2 p-2 w-full border-[1px] border-[#C2C5E1] h-8 text-sm"
       name="expenses"
       type="number"
       id="expenses"
@@ -67,6 +70,9 @@ function Income() {
       value={incomeData.expenses}
       onChange={handleChange}
     />
+    <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "expenses")?.message}
+                </p>
     <button className="disabled:bg-[#dad7d3] disabled:cursor-no-drop bg-[#D8C3A5] text-amber-900 px-3 py-2 text-[16px] rounded-lg">
       Calculate Profit
     </button>

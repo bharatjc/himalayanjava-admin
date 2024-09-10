@@ -96,6 +96,9 @@ function AddMenu() {
         value={menudata.menuName}
         onChange={handleChange}
       />
+      <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "menuName")?.message}
+                </p>
       <label htmlFor="menuPrice" className="font-semibold">
         Price*
       </label>
@@ -108,6 +111,9 @@ function AddMenu() {
         value={menudata.menuPrice}
         onChange={handleChange}
       />
+      <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "menuPrice")?.message}
+                </p>
       <label htmlFor="image" className="font-semibold">
         Image
       </label>

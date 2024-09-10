@@ -91,6 +91,9 @@ let userId = localStorage.getItem("userId")
         value={userData.username}
         onChange={handleChange}
       />
+      <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "username")?.message}
+                </p>
       <label htmlFor="email">
         Email*
       </label>
@@ -102,6 +105,9 @@ let userId = localStorage.getItem("userId")
         value={userData.email}
         onChange={handleChange}
       />
+      <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "email")?.message}
+                </p>
       <label htmlFor="password">
         Password*
       </label>
@@ -113,6 +119,9 @@ let userId = localStorage.getItem("userId")
         value={userData.password}
         onChange={handleChange}
       />
+      <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "password")?.message}
+                </p>
       <label htmlFor="businessname">
         Business name*
       </label>
@@ -124,6 +133,9 @@ let userId = localStorage.getItem("userId")
         value={userData.businessname}
         onChange={handleChange}
       />
+      <p className="text-[12px] text-red-500">
+                  {formErrors.find(error => error.field === "businessname")?.message}
+                </p>
       <label htmlFor="image">
         Profile Picture
       </label>
