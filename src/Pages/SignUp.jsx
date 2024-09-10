@@ -47,6 +47,13 @@ function SignUp() {
     }
 
   return (
+    <>
+    {loading ? (
+        <div className="h-[100vh] w-full fixed z-50 flex flex-col items-center justify-center">
+          <h2 className="text-4xl font-semibold text-amber-900">Loading...</h2>
+          <img src="../loading1.gif" alt="" className="w-24 h-24" />
+        </div>
+      ) :
     <div className="bg-white h-[100vh] flex flex-col items-center py-10">
       <div className="w-[320px] md:w-[400px]">
         <div className="flex justify-center">
@@ -137,6 +144,8 @@ function SignUp() {
         </div>
       </div>
     </div>
+}
+    </>
   );
 }
 
