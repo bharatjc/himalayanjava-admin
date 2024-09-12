@@ -18,6 +18,7 @@ import axios from 'axios'
 function Home() {
   const [comments, setComments] = useState([]);
   const [popularOutlets, setPopularOutlets] = useState([])
+  const [searchQuery, setSearchQuery] = useState('');
   let admin = JSON.parse(localStorage.getItem("initialdata"));
   useEffect(() => {
     axios
@@ -30,6 +31,15 @@ function Home() {
          setPopularOutlets(res.data.popularOutlets)
       })
   }, []);
+
+  const filteredComments = comments.filter(comment =>
+    comment.comment.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredPopularOutlets = popularOutlets.filter(outlet =>
+    outlet.location.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
 
   return (
     <div className="bg-[#D3D3D3] flex items-center justify-center min-h-screen p-5">
@@ -94,6 +104,8 @@ function Home() {
               className="bg-transparent text-sm w-full outline-none border-b border-gray-300 p-1"
               type="text"
               placeholder="Search or type a command"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <Outlet />
@@ -138,12 +150,13 @@ function Home() {
             <div className="w-full"><h2 className="font-semibold">Outlets</h2> <br />
             <div className="w-full h-12 overflow-hidden">
               <div className="text-xs h-full overflow-y-auto">
-              {
-                popularOutlets? popularOutlets.map((popularOutlet,index)=>{
-                  return <div key={index}>{index+1 }.  {popularOutlet.location}
-            </div>
-                }) : ""
-              }
+              {filteredPopularOutlets.length > 0 ? (
+                    filteredPopularOutlets.map((outlet, index) => (
+                      <div key={index}>{index + 1}. {outlet.location}</div>
+                    ))
+                  ) : (
+                    "No results found"
+                  )}
               </div>
               
             </div>
@@ -153,12 +166,13 @@ function Home() {
             <h2 className="mb-2 font-semibold">New Comments</h2>
             <div className="w-full h-36 overflow-hidden">
               <div className="text-xs h-full overflow-y-auto">
-              {
-                comments? comments.map((comment,index)=>{
-                  return <div key={index}>{index+1 }.  {comment.comment}
-            </div>
-                }) : "..."
-              }
+              {filteredComments.length > 0 ? (
+                  filteredComments.map((comment, index) => (
+                    <div key={index}>{index + 1}. {comment.comment}</div>
+                  ))
+                ) : (
+                  "No results found"
+                )}
               </div>
               
             </div>
