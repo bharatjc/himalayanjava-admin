@@ -1,23 +1,44 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
-import { BsInfoCircleFill } from "react-icons/bs";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import { TiTick } from "react-icons/ti";
+import { RiCloseFill } from "react-icons/ri";
 
 function CustomerInfo() {
+  const [loading, setLoading] = useState(false)
  const [showAll, setShowAll] = useState(false)
  const [orderData, setOrderData] = useState([])
- const [status, setStatus] = useState("pending")
+ const [status, setStatus] = useState({})
   
-  useEffect(()=>{
-    axios.get(`https://himalayanjava-server.onrender.com/order`).then((res)=>{
-      setOrderData(res.data.orders)
-    })
-  },[])
+ useEffect(() => {
+  axios.get(`https://himalayanjava-server.onrender.com/order`).then((res) => {
+    setOrderData(res.data.orders);
+    const initialStatus = res.data.orders.reduce((acc, order) => {
+      acc[order._id] = order.status || "pending"; 
+      return acc;
+    }, {});
+    setStatus(initialStatus);
+  });
+}, []);
 
-  function handleStatus(e){
+  function handleStatus(e, id){
     e.preventDefault()
+    setLoading(true);
     const selectedStatus = e.target.value;
-    setStatus(selectedStatus);
-    console.log("Status updated successfully!", status)
+    setStatus(prevStatus => ({ 
+      ...prevStatus, 
+      [id]: selectedStatus 
+    }));
+      axios.put(`https://himalayanjava-server.onrender.com/order/${id}`,{status : selectedStatus}).then((res)=>{
+        toast("Status updated successfully!", { autoClose: 2000 });
+        setLoading(false);
+      }).catch((err) => {
+        setLoading(false);
+          toast.error("Error updating status", { autoClose: 2000 });
+        }
+);
+    
   }
   return (
     <div className="md:text-center mb-10">
@@ -35,13 +56,22 @@ function CustomerInfo() {
     return <div key={index} className="my-7 border-t-2 border-l-2 border-r-2 px-2">
      <div className="flex font-semibold border-b-2 py-3 mb-5 justify-around text-center">
      <h2>Customer no. {index+1}</h2>
-     <h2>status :
-      <select name="status" id="status" value={status} onChange={handleStatus} className="text-sm text-gray-500">
-        <option value="pending"> pending</option>
-        <option value="success"> success</option>
-        <option value="pending"> fail</option>
-      </select>
-     </h2>
+     <div className="flex">
+     <h2>status : &nbsp; </h2>
+      <div>
+      {
+    order.status === "success" ? <h2 className="text-green-600 flex items-center">success <TiTick /></h2> :order.status === "fail"? <h2 className="text-red-600 flex items-center">fail <RiCloseFill /></h2> :  <select name="status" id="status"value={status[order._id] || "pending"} onChange={(e)=>{
+      return handleStatus(e,order._id)
+    }} className="text-sm text-gray-500">
+      <option value="pending"> pending</option>
+      <option value="success"> success</option>
+      <option value="fail"> fail</option>
+    </select>
+
+   } 
+      </div>
+     </div>
+    
       </div>
 
       <div>
@@ -108,13 +138,21 @@ function CustomerInfo() {
     return <div key={index} className="my-7 border-t-2 border-l-2 border-r-2 px-2">
        <div className="flex font-semibold border-b-2 py-3 mb-5 justify-around">
      <h2 className="">Customer no. {index+1}</h2>
-     <h2>status :
-     <select name="status" id="status" className="text-sm text-gray-500" value={status} onChange={handleStatus}>
-        <option value="pending"> pending</option>
-        <option value="success"> success</option>
-        <option value="pending"> fail</option>
-      </select>
-     </h2>
+     <div className="flex">
+     <h2>status : &nbsp; </h2>
+      <div>
+      {
+    order.status === "success" ? <h2 className="text-green-600 flex items-center">success <TiTick /></h2> :order.status === "fail"? <h2 className="text-red-600 flex items-center">fail <RiCloseFill /></h2> :  <select name="status" id="status"value={status[order._id] || "pending"} onChange={(e)=>{
+      return handleStatus(e,order._id)
+    }} className="text-sm text-gray-500">
+      <option value="pending"> pending</option>
+      <option value="success"> success</option>
+      <option value="fail"> fail</option>
+    </select>
+
+   } 
+      </div>
+     </div>
       </div>
       <div>
 
