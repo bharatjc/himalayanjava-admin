@@ -19,9 +19,10 @@ function Dashboard() {
   let [dataStyle, setDataStyle] = useState("table")
   useEffect(() => {
     axios
-      .get(`https://himalayanjava-server.onrender.com/latestcustomers`)
+      .get(`https://himalayanjava-server.onrender.com/order`)
       .then((res) => {
         setNewCustomers(res.data);
+        console.log(res.data)
       });
 
     axios
@@ -29,6 +30,7 @@ function Dashboard() {
       .then((res) => {
         setIncome(res.data);
       });
+      console.log(newCustomers)
   }, []);
 
   const chartData = income.profitData
@@ -57,7 +59,7 @@ function Dashboard() {
         <div>
           <h2>Customers</h2>
           <p className="text-[12px] text-center font-bold">
-            {newCustomers && newCustomers.customers
+            {newCustomers && newCustomers.orders
               ? newCustomers.total
               : "..."}
           </p>
@@ -76,15 +78,14 @@ function Dashboard() {
       <div className="text-sm mb-5">
         <h2>Welcome to our new customers</h2>
         <ul className="flex flex-wrap my-5 gap-10">
-          {newCustomers && newCustomers.customers
-            ? newCustomers.customers.map((customer, index) => {
+          {newCustomers.orders && newCustomers.orders.length > 0 ? newCustomers.orders.slice(0, 4).map((order, index) => {
                 return (
                   <li
                     key={index}
                     className="border-r-2 px-8 flex flex-row md:flex-col gap-x-8 items-center md:gap-x-0"
                   >
                     <FaRegUserCircle className="text-5xl" />
-                    <p className="text-center text-[10px]">{customer.name}</p>
+                    <p className="text-center text-[10px]">{order.customer}</p>
                   </li>
                 );
               })
