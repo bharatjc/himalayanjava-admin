@@ -70,7 +70,7 @@ function AddServices() {
      axios
      .delete(`https://himalayanjava-server.onrender.com/deleteservice/${title}`)
      .then((res) => {
-       toast(`Menu deleted successfully`, { autoClose: 2000 });
+       toast(`Service deleted successfully`, { autoClose: 2000 });
      })
      .catch((err) => {
        console.error("Error:", err);
