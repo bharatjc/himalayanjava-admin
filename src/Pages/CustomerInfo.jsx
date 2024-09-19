@@ -19,6 +19,7 @@ function CustomerInfo() {
       return acc;
     }, {});
     setStatus(initialStatus);
+    console.log(res.data.orders)
   });
 }, []);
 
@@ -82,7 +83,10 @@ function CustomerInfo() {
       </div>
       <div className="flex justify-around mb-3 md:mb-1 flex-col md:flex-row">
       <h2 className="font-semibold">Card no: <span className="text-gray-400 text-sm">{order.cardNo}</span></h2>
-      <h2 className="font-semibold">Address: <span className="text-gray-400 text-sm">{order.city}, {order.province}</span></h2>
+      <h2 className="font-semibold">Address:
+         <span className="text-gray-400 text-sm">
+          {order.city}, {order.province}
+          </span></h2>
       </div>
 
       </div>
@@ -162,7 +166,9 @@ function CustomerInfo() {
       </div>
       <div className="flex justify-around mb-3 md:mb-1 flex-col md:flex-row">
       <h2 className="font-semibold">Card no: <span className="text-gray-400 text-sm">{order.cardNo}</span></h2>
-      <h2 className="font-semibold">Address: <span className="text-gray-400 text-sm">{order.city}, {order.province}</span></h2>
+      <h2 className="font-semibold">Address: <span className="text-gray-400 text-sm">
+        {order.city}, {order.province}
+        </span></h2>
       </div>
 
       </div>
