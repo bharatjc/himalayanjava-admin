@@ -22,7 +22,6 @@ function Dashboard() {
       .get(`https://himalayanjava-server.onrender.com/order`)
       .then((res) => {
         setNewCustomers(res.data);
-        console.log(res.data)
       });
 
     axios
@@ -30,7 +29,6 @@ function Dashboard() {
       .then((res) => {
         setIncome(res.data);
       });
-      console.log(newCustomers)
   }, []);
 
   const chartData = income.profitData

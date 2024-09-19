@@ -19,7 +19,6 @@ function CustomerInfo() {
       return acc;
     }, {});
     setStatus(initialStatus);
-    console.log(res.data.orders)
   });
 }, []);
 
